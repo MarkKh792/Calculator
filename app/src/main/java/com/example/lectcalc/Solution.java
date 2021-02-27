@@ -1,5 +1,9 @@
 package com.example.lectcalc;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +11,13 @@ public class Solution {
 
     MainActivity main = new MainActivity();
 
-    public double calculate (String expression, int countOperation) {
+    public BigDecimal calculate (String expression, int countOperation) {
 
-            expression = expression.replace("π", "3.14159265");
-            
+        MathContext context = new MathContext(9,RoundingMode.HALF_UP);
+
+        expression = expression.replace("π", "3.14159265");
+        expression = expression.replace("e", "2.71828183");
+
         Solution solution = new Solution();
         //solution.recurse(expression, 0); //expected output 0.5 6
         //implement
@@ -19,11 +26,24 @@ public class Solution {
 
         // получение и вывод результата
         TokenList tokenList = new TokenList(tokens);
-        double result = Math.round(expression(tokenList) * 100) / 100.0;
-        if (result % 1.0 == 0.0)
-            return  (long)result; //System.out.println((long)result + " " + countOperation);
+        double result = expression(tokenList);
+
+        BigDecimal res = new BigDecimal(result, context);
+        return res;
+
+        /*if (result % 1.0 == 0.0) {
+            BigDecimal res = new BigDecimal(result);
+            return res;
+        }
+        else {
+            BigDecimal res1 = new BigDecimal(result, context);
+            return res1;
+        }*/
+        //double result = Math.round(expression(tokenList) * 100) / 100.0;
+        /*if (result % 1.0 == 0.0)
+            return  (double) result; //System.out.println((long)result + " " + countOperation);
         else
-            return result;//System.out.println(result + " " + countOperation);
+            return result;//System.out.println(result + " " + countOperation);*/
 
     }
 
@@ -81,6 +101,12 @@ public class Solution {
                     // процент
                 case '%':
                     tokens.add(new Token(TokenType.PER, expr[i]));
+                    i++;
+                    countOperation++;
+                    break;
+                    //факториал
+                case '!':
+                    tokens.add(new Token(TokenType.FACT, expr[i]));
                     i++;
                     countOperation++;
                     break;
@@ -152,6 +178,14 @@ public class Solution {
                         countOperation++;
                     }
 
+                    else if (i + 1 < expr.length &&
+                            expr[i] == '1' && expr[i + 1] == '/' ) {
+                        tokens.add(new Token(TokenType.LN, "1/"));
+                        i += 2;
+                        countOperation++;
+                    }
+
+
                     else
                         throw new RuntimeException("Unexpected character: " + expr[i] + " at position " + i);
                     break;
@@ -211,6 +245,13 @@ public class Solution {
                 case PER:
                     value = value / 100;
                     break;
+                case FACT:
+                    int tmp = (int) value;
+                    if (((double) tmp) == value)
+                        value = factorial(tmp);
+                    else
+                        value = Math.exp(Math.log(factorial(tmp)) + (value - tmp) * Math.log(tmp+1));
+                    break;
                 default:
                     tokenList.back();
                     return value;
@@ -241,7 +282,7 @@ public class Solution {
             case SUB:
                 return - pow(tokenList);
             case L_BR:
-            case COS: case SIN: case TAN: case LOG: case LN: case PER:
+            case COS: case SIN: case TAN: case LOG: case LN: case DELX:
                 double value = 0.0;
                 if (token.type == TokenType.L_BR)
                     value = add_sub(tokenList);
@@ -255,6 +296,8 @@ public class Solution {
                     value = Math.log10(add_sub(tokenList));
                 else if (token.type == TokenType.LN)
                     value = Math.log(add_sub(tokenList));
+                else if (token.type == TokenType.DELX)
+                    value = 1 / add_sub(tokenList);
                 token = tokenList.next();
                 if (token.type != TokenType.R_BR)
                     throw new RuntimeException("Unexpected token: " + token.title + " at position " + tokenList.getIndex());
@@ -270,11 +313,11 @@ public class Solution {
 
     private enum TokenType {
         ADD, SUB,           // сложение, вычитание
-        MUL, DIV, PER,           // умножение, деление, процент
+        MUL, DIV, PER, DELX, FACT,          // умножение, деление, процент, 1/x, факториал
         POW,                // степень
         NUM,                // число
         L_BR, R_BR,         // левая скобка, правая скобка
-        COS, SIN, TAN, LOG, LN,      // тригонометрические функции
+        COS, SIN, TAN, LOG, LN,      // тригонометрические функции и логарифмы
         EOF                 // конец выражения
     }
 
@@ -326,6 +369,14 @@ public class Solution {
         public int getIndex() {
             return i;
         }
+    }
+
+    public static double factorial(int n) {
+
+        double ret = 1;
+        for (int i = 1; i <= n; ++i) ret *=i;
+        return ret;
+
     }
 
     /*public int calculate (String expression) {

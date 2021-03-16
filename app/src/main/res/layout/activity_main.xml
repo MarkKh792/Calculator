@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -21,48 +30,54 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="C"
-            android:onClick="onClick"/>
+            android:backgroundTint="#F44336"
+            android:onClick="onClick"
+            android:text="C" />
 
         <Button
             android:id="@+id/percent"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="%"
-            android:onClick="onClick"/>
+            android:backgroundTint="#FF9800"
+            android:onClick="onClick"
+            android:text="%" />
 
         <Button
             android:id="@+id/bracket1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="("
-            android:onClick="onClick"/>
+            android:backgroundTint="#FF9800"
+            android:onClick="onClick"
+            android:text="(" />
 
         <Button
             android:id="@+id/bracket2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text=")"
-            android:onClick="onClick"/>
+            android:backgroundTint="#FF9800"
+            android:onClick="onClick"
+            android:text=")" />
 
         <Button
             android:id="@+id/divide"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="/"
-            android:onClick="onClick"/>
+            android:backgroundTint="#FF9800"
+            android:onClick="onClick"
+            android:text="/" />
 
         <Button
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="del"
-            android:onClick="onClick"/>
+            android:backgroundTint="#F44336"
+            android:onClick="onClick"
+            android:text="del" />
     </LinearLayout>
 
     <LinearLayout
@@ -79,32 +94,36 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="7"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="7" />
 
         <Button
             android:id="@+id/btn8"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="8"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="8" />
 
         <Button
             android:id="@+id/btn9"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="9"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="9" />
 
         <Button
             android:id="@+id/multiply"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="*"
-            android:onClick="onClick"/>
+            android:backgroundTint="#FF9800"
+            android:onClick="onClick"
+            android:text="*" />
     </LinearLayout>
 
     <LinearLayout
@@ -121,32 +140,36 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="4"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="4" />
 
         <Button
             android:id="@+id/btn5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="5"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="5" />
 
         <Button
             android:id="@+id/btn6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="6"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="6" />
 
         <Button
             android:id="@+id/minus"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="-"
-            android:onClick="onClick"/>
+            android:backgroundTint="#FF9800"
+            android:onClick="onClick"
+            android:text="-" />
     </LinearLayout>
 
     <LinearLayout
@@ -163,32 +186,36 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="1"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="1" />
 
         <Button
             android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="2"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="2" />
 
         <Button
             android:id="@+id/btn3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="3"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="3" />
 
         <Button
             android:id="@+id/plus"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="+"
-            android:onClick="onClick"/>
+            android:backgroundTint="#FF9800"
+            android:onClick="onClick"
+            android:text="+" />
     </LinearLayout>
 
     <LinearLayout
@@ -204,49 +231,41 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="0"
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="0" />
 
         <Button
             android:id="@+id/dot"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="."
-            android:onClick="onClick"/>
+            android:backgroundTint="@color/purple_200"
+            android:onClick="onClick"
+            android:text="." />
 
         <Button
             android:id="@+id/equals"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="="
-            android:onClick="onClick"/>
+            android:layout_weight="10"
+            android:backgroundTint="#FF9800"
+            android:onClick="onClick"
+            android:text="=" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/result"
-        android:layout_width="387dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:textSize="30sp"
+        android:layout_width="0dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="10dp"
         android:hint="0.0"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="387dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="12dp"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

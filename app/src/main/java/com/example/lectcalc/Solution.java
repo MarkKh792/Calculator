@@ -1,5 +1,7 @@
 package com.example.lectcalc;
 
+import android.widget.Toast;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -17,6 +19,14 @@ public class Solution {
 
         expression = expression.replace("π", "3.14159265");
         expression = expression.replace("e", "2.71828183");
+        expression = expression.replace("√", "1√");
+        expression = expression.replace(".(", "(");
+        expression = expression.replace("(.", "(");
+        expression = expression.replace(").", ")");
+        expression = expression.replace(".)", ")");
+        expression = expression.replace("tan(.", "tan(");
+        expression = expression.replace(".tan(", "tan(");
+        expression = expression.replace("tan(.", "tan(");
 
         Solution solution = new Solution();
         //solution.recurse(expression, 0); //expected output 0.5 6
@@ -31,40 +41,7 @@ public class Solution {
         BigDecimal res = new BigDecimal(result, context);
         return res;
 
-        /*if (result % 1.0 == 0.0) {
-            BigDecimal res = new BigDecimal(result);
-            return res;
-        }
-        else {
-            BigDecimal res1 = new BigDecimal(result, context);
-            return res1;
-        }*/
-        //double result = Math.round(expression(tokenList) * 100) / 100.0;
-        /*if (result % 1.0 == 0.0)
-            return  (double) result; //System.out.println((long)result + " " + countOperation);
-        else
-            return result;//System.out.println(result + " " + countOperation);*/
-
     }
-
-    /*public static void main(String[] args) {
-        Solution solution = new Solution();
-        solution.recurse("1000000000*5", 0); //expected output 0.5 6
-    }*/
-
-    /*public double recurse(final String expression, int countOperation) {
-        //implement
-        List<Token> tokens = new ArrayList<>();
-        countOperation = parseExpr(tokens, expression);
-
-        // получение и вывод результата
-        TokenList tokenList = new TokenList(tokens);
-        double result = Math.round(expression(tokenList) * 100) / 100.0;
-        if (result % 1.0 == 0.0)
-            return  (long)result; //System.out.println((long)result + " " + countOperation);
-        else
-            return result;//System.out.println(result + " " + countOperation);
-    }*/
 
     // лексический анализ - разбор выражения на лексемы (токены)
     public static int parseExpr(List<Token> tokens, String expression) {
@@ -107,6 +84,11 @@ public class Solution {
                     //факториал
                 case '!':
                     tokens.add(new Token(TokenType.FACT, expr[i]));
+                    i++;
+                    countOperation++;
+                    break;
+                case '√':
+                    tokens.add(new Token(TokenType.ROOT, expr[i]));
                     i++;
                     countOperation++;
                     break;
@@ -240,10 +222,14 @@ public class Solution {
                     value *= pow(tokenList);
                     break;
                 case DIV:
-                    value /= pow(tokenList);
+                        value /= pow(tokenList);
                     break;
                 case PER:
                     value = value / 100;
+                    break;
+                case ROOT:
+                    value = 0;
+                    value = Math.sqrt(pow(tokenList));
                     break;
                 case FACT:
                     int tmp = (int) value;
@@ -314,7 +300,7 @@ public class Solution {
     private enum TokenType {
         ADD, SUB,           // сложение, вычитание
         MUL, DIV, PER, DELX, FACT,          // умножение, деление, процент, 1/x, факториал
-        POW,                // степень
+        POW, ROOT,                // степень, корень
         NUM,                // число
         L_BR, R_BR,         // левая скобка, правая скобка
         COS, SIN, TAN, LOG, LN,      // тригонометрические функции и логарифмы
@@ -378,201 +364,5 @@ public class Solution {
         return ret;
 
     }
-
-    /*public int calculate (String expression) {
-        int res;
-        List<Lexeme> lexemes = lexAnalyze(expression);
-        LexemeBuffer lexemeBuffer = new LexemeBuffer(lexemes);
-        res = expr(lexemeBuffer);
-        return res;
-
-    }
-    /*public static void main(String[] args) {
-        String expressionText = "122 - 34 - 3* (55 + 5* (3 - 2)) * 2";
-        List<Lexeme> lexemes = lexAnalyze(expressionText);
-        LexemeBuffer lexemeBuffer = new LexemeBuffer(lexemes);
-        System.out.println(expr(lexemeBuffer));
-    }
-
-    public enum LexemeType {
-        LEFT_BRACKET, RIGHT_BRACKET,
-        OP_PLUS, OP_MINUS, OP_MUL, OP_DIV,
-        NUMBER,
-        EOF;
-    }
-
-    public static class Lexeme {
-        LexemeType type;
-        String value;
-
-        public Lexeme(LexemeType type, String value) {
-            this.type = type;
-            this.value = value;
-        }
-
-        public Lexeme(LexemeType type, Character value) {
-            this.type = type;
-            this.value = value.toString();
-        }
-
-        @Override
-        public String toString() {
-            return "Lexeme{" +
-                    "type=" + type +
-                    ", value='" + value + '\'' +
-                    '}';
-        }
-    }
-
-    public static class LexemeBuffer {
-        private int pos;
-
-        public List<Lexeme> lexemes;
-
-        public LexemeBuffer(List<Lexeme> lexemes) {
-            this.lexemes = lexemes;
-        }
-
-        public Lexeme next() {
-            return lexemes.get(pos++);
-        }
-
-        public void back() {
-            pos--;
-        }
-
-        public int getPos() {
-            return pos;
-        }
-    }
-
-    public static List<Lexeme> lexAnalyze(String expText) {
-        ArrayList<Lexeme> lexemes = new ArrayList<>();
-        int pos = 0;
-        while (pos< expText.length()) {
-            char c = expText.charAt(pos);
-            switch (c) {
-                case '(':
-                    lexemes.add(new Lexeme(LexemeType.LEFT_BRACKET, c));
-                    pos++;
-                    continue;
-                case ')':
-                    lexemes.add(new Lexeme(LexemeType.RIGHT_BRACKET, c));
-                    pos++;
-                    continue;
-                case '+':
-                    lexemes.add(new Lexeme(LexemeType.OP_PLUS, c));
-                    pos++;
-                    continue;
-                case '-':
-                    lexemes.add(new Lexeme(LexemeType.OP_MINUS, c));
-                    pos++;
-                    continue;
-                case '*':
-                    lexemes.add(new Lexeme(LexemeType.OP_MUL, c));
-                    pos++;
-                    continue;
-                case '/':
-                    lexemes.add(new Lexeme(LexemeType.OP_DIV, c));
-                    pos++;
-                    continue;
-                default:
-                    if (c <= '9' && c >= '0') {
-                        StringBuilder sb = new StringBuilder();
-                        do {
-                            sb.append(c);
-                            pos++;
-                            if (pos >= expText.length()) {
-                                break;
-                            }
-                            c = expText.charAt(pos);
-                        } while (c <= '9' && c >= '0');
-                        lexemes.add(new Lexeme(LexemeType.NUMBER, sb.toString()));
-                    } else {
-                        if (c != ' ') {
-                            throw new RuntimeException("Unexpected character: " + c);
-                        }
-                        pos++;
-                    }
-            }
-        }
-        lexemes.add(new Lexeme(LexemeType.EOF, ""));
-        return lexemes;
-    }
-
-    public static int expr(LexemeBuffer lexemes) {
-        Lexeme lexeme = lexemes.next();
-        if (lexeme.type == LexemeType.EOF) {
-            return 0;
-        } else {
-            lexemes.back();
-            return plusminus(lexemes);
-        }
-    }
-
-    public static int plusminus(LexemeBuffer lexemes) {
-        int value = multdiv(lexemes);
-        while (true) {
-            Lexeme lexeme = lexemes.next();
-            switch (lexeme.type) {
-                case OP_PLUS:
-                    value += multdiv(lexemes);
-                    break;
-                case OP_MINUS:
-                    value -= multdiv(lexemes);
-                    break;
-                case EOF:
-                case RIGHT_BRACKET:
-                    lexemes.back();
-                    return value;
-                default:
-                    throw new RuntimeException("Unexpected token: " + lexeme.value
-                            + " at position: " + lexemes.getPos());
-            }
-        }
-    }
-
-    public static int multdiv(LexemeBuffer lexemes) {
-        int value = factor(lexemes);
-        while (true) {
-            Lexeme lexeme = lexemes.next();
-            switch (lexeme.type) {
-                case OP_MUL:
-                    value *= factor(lexemes);
-                    break;
-                case OP_DIV:
-                    value /= factor(lexemes);
-                    break;
-                case EOF:
-                case RIGHT_BRACKET:
-                case OP_PLUS:
-                case OP_MINUS:
-                    lexemes.back();
-                    return value;
-                default:
-                    throw new RuntimeException("Unexpected token: " + lexeme.value
-                            + " at position: " + lexemes.getPos());
-            }
-        }
-    }
-
-    public static int factor(LexemeBuffer lexemes) {
-        Lexeme lexeme = lexemes.next();
-        switch (lexeme.type) {
-            case NUMBER:
-                return Integer.parseInt(lexeme.value);
-            case LEFT_BRACKET:
-                int value = plusminus(lexemes);
-                lexeme = lexemes.next();
-                if (lexeme.type != LexemeType.RIGHT_BRACKET) {
-                    throw new RuntimeException("Unexpected token: " + lexeme.value
-                            + " at position: " + lexemes.getPos());
-                }
-                return value;
-            default:
-                throw new RuntimeException("Unexpected token: " + lexeme.value
-                        + " at position: " + lexemes.getPos());
-        }
-    }*/
 }
 

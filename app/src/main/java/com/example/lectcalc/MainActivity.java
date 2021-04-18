@@ -27,15 +27,14 @@ public class MainActivity extends AppCompatActivity {
             pi, e;
     TextView result;
     String expression = " ", strAnswer = " ";
-    int c, n, i, rbr, lbr = 0;
+    int c, n, i, rbr, lbr, plusCh, minusCh, er, click = 0;
+
     //double answer;
     BigDecimal answer;
 
     ListView listView;
     static ArrayList<String> answers = new ArrayList<>();
     static ArrayAdapter<String> adapter;
-
-    EditText text1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,103 +75,465 @@ public class MainActivity extends AppCompatActivity {
         pi = findViewById(R.id.pi);
         e = findViewById(R.id.e);
 
-        //text1 = findViewById(R.id.text1);
-
         listView = (ListView) findViewById(R.id.listView1);
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, answers);
 
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
+                // по позиции получаем выбранный элемент
+                ArrayList<String> selectedItem = answers;
+                // установка текста элемента TextView
+                result.setText(selectedItem.get(position));
+                i = 0;
+                click = 1;
+                rbr = 0;
+                lbr = 0;
+            }
+        });
     }
 
     public void onClick (View v) {
-        Solution solution = new Solution();
-        History history = new History();
+        try {
+            Solution solution = new Solution();
 
-        if (c == 1) {
-            result.setText("");
-            c = 0;
-        }
-
-        switch (v.getId()) {
-
-            case R.id.btn0: result.append("0"); i = 0; break;
-            case R.id.btn1: result.append("1"); i = 0; break;
-            case R.id.btn2: result.append("2"); i = 0; break;
-            case R.id.btn3: result.append("3"); i = 0; break;
-            case R.id.btn4: result.append("4"); i = 0; break;
-            case R.id.btn5: result.append("5"); i = 0; break;
-            case R.id.btn6: result.append("6"); i = 0; break;
-            case R.id.btn7: result.append("7"); i = 0; break;
-            case R.id.btn8: result.append("8"); i = 0; break;
-            case R.id.btn9: result.append("9"); i = 0; break;
-
-            case R.id.dot: result.append("."); i = 0; break;
-            case R.id.bracket1: result.append("("); i = 0; lbr++; break;
-            case R.id.bracket2: result.append(")"); i = 0; rbr++; break;
-            case R.id.divide: result.append("/"); i = 0; break;
-            case R.id.multiply: result.append("*"); i = 0; break;
-            case R.id.minus: result.append("-"); i = 0; break;
-            case R.id.plus: result.append("+"); i = 0; break;
-            case R.id.percent: result.append("%"); i = 0; break;
-            case R.id.delx: result.append("1/"); i = 0; break;
-            case R.id.fact: result.append("!"); i = 0; break;
-            case R.id.sin: result.append("sin("); i = 0; lbr++; break;
-            case R.id.cos: result.append("cos("); i = 0; lbr++; break;
-            case R.id.tg: result.append("tan("); i = 0; lbr++; break;
-            case R.id.log: result.append("log("); i = 0; lbr++; break;
-            case R.id.ln: result.append("ln("); i = 0; lbr++; break;
-            case R.id.pow: result.append("^"); i = 0; break;
-            case R.id.pi: result.append("π"); i = 0; break;
-            case R.id.e: result.append("e"); i = 0; break;
-            case R.id.root: result.append("√"); i = 0; break;
-            case R.id.erase:
-                //expression = result.getText().toString();
-                //test.setText(expression);
-                c = 0;
+            /*if (c == 1) {
                 result.setText("");
-                if (i == 1) {
-                    adapter.clear(); //очистка истории
-                    i--;
-                }
-                i++;
-                break;
-            case R.id.back:
-                expression = result.getText().toString();
-                if (expression.length() > 0) {
-                    expression = expression.substring(0, expression.length() - 1);
-                    result.setText(expression);
-                    i = 0;
-                } break;
-            case R.id.equals:
-                if (rbr != lbr) {
+                c = 0;
+            }*/
+            char lastCh1;
+            switch (v.getId()) {
 
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "Неверно проставлены скобки", Toast.LENGTH_SHORT);
-                    toast.show();
+                case R.id.btn0:
+                    if (!calculateNineCh()) {
+                        result.append("0");
+                        i = 0;
+                        er = 0;
+                    }
+                    break;
+                case R.id.btn1:
+                    if (!calculateNineCh()) {
+                        result.append("1");
+                        i = 0;
+                        er = 0;
+                    }
+                    break;
+                case R.id.btn2:
+                    if (!calculateNineCh()) {
+                        result.append("2");
+                        i = 0;
+                        er = 0;
+                    }
+                    break;
+                case R.id.btn3:
+                    if (!calculateNineCh()) {
+                        result.append("3");
+                        i = 0;
+                        er = 0;
+                    }
+                    break;
+                case R.id.btn4:
+                    if (!calculateNineCh()) {
+                        result.append("4");
+                        i = 0;
+                        er = 0;
+                    }
+                    break;
+                case R.id.btn5:
+                    if (!calculateNineCh()) {
+                        result.append("5");
+                        i = 0;
+                        er = 0;
+                    }
+                    break;
+                case R.id.btn6:
+                    if (!calculateNineCh()) {
+                        result.append("6");
+                        i = 0;
+                        er = 0;
+                    }
+                    break;
+                case R.id.btn7:
+                    if (!calculateNineCh()) {
+                        result.append("7");
+                        i = 0;
+                        er = 0;
+                    }
+                    break;
+                case R.id.btn8:
+                    if (!calculateNineCh()) {
+                        result.append("8");
+                        i = 0;
+                        er = 0;
+                    }
+                    break;
+                case R.id.btn9:
+                    if (!calculateNineCh()) {
+                        result.append("9");
+                        i = 0;
+                        er = 0;
+                    }
                     break;
 
-                }
-                c = 1;
-                answer = solution.calculate(result.getText().toString(), 0);
-                result.append(" = "+ answer.toString());
-                listView.setAdapter(adapter);
-                adapter.setNotifyOnChange(true);
-                adapter.add(result.getText().toString());
-                listView.setSelection(n); //прокрутка до позиции n
-                n++;
-                i = 0;
-                break;
-        }
+                case R.id.dot:
+                    //if (er == 1) {charCheck();}
+                    //else {result.append("."); i = 0; er = 1;}
+                    expression = result.getText().toString();
+                    if (expression.length() > 0) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 != '.' && lastCh1 != '(' && er == 0 && lastCh1 != '-' && lastCh1 != '/' && lastCh1 != '+' && lastCh1 != '*'
+                                && lastCh1 != '√' && lastCh1 != '^' && lastCh1 != '%') {
 
+                            result.append(".");
+                            i = 0;
+                        }
+                    }
+
+                    break;
+                case R.id.bracket1:
+                    result.append("(");
+                    i = 0;
+                    lbr++;
+                    break;
+                case R.id.bracket2:
+                    result.append(")");
+                    i = 0;
+                    rbr++;
+                    break;
+                case R.id.divide:
+                    expression = result.getText().toString();
+                    if (expression.length() >= 1) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 == '-' || lastCh1 == '+' || lastCh1 == '^' || lastCh1 == '*'
+                                || lastCh1 == '√' || lastCh1 == '!' || lastCh1 == '.') {
+                            if (expression.charAt(expression.length() - 2) == '(') er = 1;
+                            else {
+                                expression = expression.substring(0, expression.length() - 1);
+                                expression = expression + "/";
+                                result.setText(expression);
+                                i = 0;
+                            }
+                        } else if (lastCh1 != '/' && lastCh1 != '(' && er == 0) {
+
+                            result.append("/");
+                            i = 0;
+
+                        }
+                    }
+                    //else {result.append("/"); i = 0;}
+                    break;
+                case R.id.multiply:
+                /*if (er == 1) {charCheck();}
+                else {result.append("*"); i = 0; er = 1;}*/
+
+                    expression = result.getText().toString();
+                    if (expression.length() >= 1) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 == '-' || lastCh1 == '/' || lastCh1 == '^' || lastCh1 == '+'
+                                || lastCh1 == '√' || lastCh1 == '!' || lastCh1 == '.') {
+                            if (expression.charAt(expression.length() - 2) == '(') er = 1;
+                            else {
+                                expression = expression.substring(0, expression.length() - 1);
+                                expression = expression + "*";
+                                result.setText(expression);
+                                i = 0;
+                            }
+                        } else if (lastCh1 != '*' && lastCh1 != '(' && er == 0) {
+                            result.append("*");
+                            i = 0;
+                        }
+                    }
+                    //else {result.append("*"); i = 0;}
+                    break;
+                case R.id.minus:
+                    expression = result.getText().toString();
+                    expression = result.getText().toString();
+                    if (expression.length() > 0) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 == '+' || lastCh1 == '/' || lastCh1 == '^' || lastCh1 == '*'
+                                || lastCh1 == '√' || lastCh1 == '!' || lastCh1 == '.') {
+                            expression = expression.substring(0, expression.length() - 1);
+                            expression = expression + "-";
+                            result.setText(expression);
+
+                        } else if (lastCh1 != '-') {
+
+                            result.append("-");
+                            i = 0;
+                        }
+                    } else {
+                        result.append("-");
+                        i = 0;
+                    }
+                    break;
+                case R.id.plus:
+                    expression = result.getText().toString();
+                    if (expression.length() >= 1) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 == '-' || lastCh1 == '/' || lastCh1 == '^' || lastCh1 == '*'
+                                || lastCh1 == '√' || lastCh1 == '!' || lastCh1 == '.') {
+                            if (expression.charAt(expression.length() - 2) == '(') er = 1;
+                            else {
+                                expression = expression.substring(0, expression.length() - 1);
+                                expression = expression + "+";
+                                result.setText(expression);
+                            }
+
+                        } else if (lastCh1 != '+' && lastCh1 != '(' && er == 0) {
+
+                            result.append("+");
+                            i = 0;
+                        }
+                    }
+
+                    break;
+                case R.id.percent:
+
+                    expression = result.getText().toString();
+                    if (expression.length() >= 1) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 == '-' || lastCh1 == '/' || lastCh1 == '+' || lastCh1 == '*'
+                                || lastCh1 == '√' || lastCh1 == '^' || lastCh1 == '.') {
+                            if (expression.charAt(expression.length() - 2) == '(') er = 1;
+                            else {
+                                expression = expression.substring(0, expression.length() - 1);
+                                expression = expression + "%";
+                                result.setText(expression);
+                                i = 0;
+                            }
+                        } else if (lastCh1 != '%' && lastCh1 != '(' && er == 0) {
+
+                            result.append("%");
+                            i = 0;
+                        }
+                    }
+                    //else {result.append("%"); i = 0;}
+                    break;
+                case R.id.delx:
+                    result.append("1/");
+                    i = 0;
+                    break;
+                case R.id.fact:
+                    expression = result.getText().toString();
+                    if (expression.length() >= 1) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 == '-' || lastCh1 == '/' || lastCh1 == '+' || lastCh1 == '*'
+                                || lastCh1 == '√' || lastCh1 == '^' || lastCh1 == '.') {
+                            if (expression.charAt(expression.length() - 2) == '(') er = 1;
+                            else {
+                                expression = expression.substring(0, expression.length() - 1);
+                                expression = expression + "!";
+                                result.setText(expression);
+                                i = 0;
+                            }
+                        } else if (lastCh1 != '!' && lastCh1 != '(' && er == 0) {
+
+                            result.append("!");
+                            i = 0;
+                        }
+
+                    }
+                    break;
+                case R.id.sin:
+                    //if (er == 1) {charCheck();}
+                    result.append("sin(");
+                    i = 0;
+                    lbr++;
+                    er = 1;
+                    break;
+                case R.id.cos:
+                    //if (er == 1) {charCheck();}
+                    result.append("cos(");
+                    i = 0;
+                    lbr++;
+                    er = 1;
+                    break;
+                case R.id.tg:
+                    //if (er == 1) {charCheck();}
+                    result.append("tan(");
+                    i = 0;
+                    lbr++;
+                    er = 1;
+                    break;
+                case R.id.log:
+                    //if (er == 1) {charCheck();}
+                    result.append("log(");
+                    i = 0;
+                    lbr++;
+                    er = 1;
+                    break;
+                case R.id.ln:
+                    //if (er == 1) {charCheck();}
+                    result.append("ln(");
+                    i = 0;
+                    lbr++;
+                    er = 1;
+                    break;
+                case R.id.pow:
+
+                    expression = result.getText().toString();
+                    if (expression.length() > 0) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 == '-' || lastCh1 == '/' || lastCh1 == '+' || lastCh1 == '*'
+                                || lastCh1 == '√' || lastCh1 == '!' || lastCh1 == '.') {
+                            if (expression.charAt(expression.length() - 2) == '(') er = 1;
+                            else {
+                                expression = expression.substring(0, expression.length() - 1);
+                                expression = expression + "^";
+                                result.setText(expression);
+                                i = 0;
+                            }
+                        } else if (lastCh1 != '^' && lastCh1 != '(' && er == 0) {
+                            result.append("^");
+                            i = 0;
+                        }
+                        ;
+                    }
+                    break;
+                case R.id.pi:
+                    expression = result.getText().toString();
+                    if (expression.length() > 0) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 != 'π' && lastCh1 != '.' && lastCh1 != '1' && lastCh1 != '2'
+                                && lastCh1 != '3' && lastCh1 != '4' && lastCh1 != '5' && lastCh1 != '6'
+                                && lastCh1 != '7' && lastCh1 != '8' && lastCh1 != '9' && lastCh1 != '0'
+                                && lastCh1 != '%' && lastCh1 != '!') {
+                            result.append("π");
+                        }
+                        else result.append("*π");
+                    }
+                    else {result.append("π"); }
+                    i = 0;
+                    break;
+                case R.id.e:
+
+                    expression = result.getText().toString();
+                    if (expression.length() > 0) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 != 'e' && lastCh1 != '.' && lastCh1 != '1' && lastCh1 != '2'
+                                && lastCh1 != '3' && lastCh1 != '4' && lastCh1 != '5' && lastCh1 != '6'
+                                && lastCh1 != '7' && lastCh1 != '8' && lastCh1 != '9' && lastCh1 != '0'
+                                && lastCh1 != '%' && lastCh1 != '!') {
+                            result.append("e");
+                        }
+                        else result.append("*e");
+                    }
+                    else {result.append("e"); }
+                    i = 0;
+                    break;
+                case R.id.root:
+                    expression = result.getText().toString();
+                    if (expression.length() > 0) {
+                        lastCh1 = expression.charAt(expression.length() - 1);
+                        if (lastCh1 == '-' || lastCh1 == '/' || lastCh1 == '^' || lastCh1 == '*'
+                                || lastCh1 == '+' || lastCh1 == '!' || lastCh1 == '.') {
+                            expression = expression.substring(0, expression.length() - 1);
+                            expression = expression + "√";
+                            result.setText(expression);
+                            i = 0;
+                        } else if (lastCh1 != '√') result.append("√");
+                    } else {
+                        result.append("√");
+                        i = 0;
+                    }
+                    break;
+                case R.id.erase:
+                    c = 0;
+                    result.setText("");
+                    if (i == 1) {
+                        adapter.clear(); //очистка истории
+                        i--;
+                    }
+                    i++;
+                    lbr = 0;
+                    rbr = 0;
+                    break;
+                case R.id.back:
+                    expression = result.getText().toString();
+
+                    if (expression.length() > 0) {
+                        char lastCh = expression.charAt(expression.length() - 1);
+                        if (lastCh == '*' || lastCh == '/' || lastCh == '.' || lastCh == '^'
+                                || lastCh == '%' || lastCh == '+' || lastCh == '-' || lastCh == '√')
+                            er = 0;
+                        if (lastCh == '(') //чтобы не ругался, если скобок нет, а lbr и rbr !=0
+                            lbr--;
+                        if (lastCh == ')')
+                            rbr--;
+                        minusCh = 0;
+                        plusCh = 0;
+                        expression = expression.substring(0, expression.length() - 1);
+                        result.setText(expression);
+                        i = 0;
+                    }
+                    break;
+                case R.id.equals:
+                    try {
+                        expression = result.getText().toString();
+                        if (click == 0) {
+                            if (rbr != lbr) {
+                                if (lbr > rbr) {
+                                    addBrackets(rbr, lbr);
+                                } else {
+
+                                    Toast toast = Toast.makeText(getApplicationContext(),
+                                            "Неверно расставлены скобки", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                    break;
+                                }
+                            }
+                        }
+                        if (click == 1) {
+                            rbr = 0;
+                            lbr = 0;
+                            for (char element : expression.toCharArray()){
+                                if (element == '(') lbr++;
+                                if (element == ')') rbr++;
+                            }
+                            if (lbr != rbr) {
+                                if (lbr > rbr) {
+                                    addBrackets(rbr, lbr);
+                                    click = 0;
+                                }
+                                else {
+                                    Toast toast = Toast.makeText(getApplicationContext(),
+                                            "Неверно расставлены скобки", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                    break;
+                                }
+                            }
+                        }
+                        c = 1;
+                        answer = solution.calculate(result.getText().toString(), 0);
+                        result.append(" = " + answer.toString());
+                        listView.setAdapter(adapter);
+                        adapter.setNotifyOnChange(true);
+                        adapter.add(result.getText().toString());
+                        listView.setSelection(n); //прокрутка до позиции n
+                        n++;
+                        i = 0;
+                    } catch (Exception e) {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Ошибка вычисления", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            er = 1;
+        }
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
 
         expression = result.getText().toString();
-        //strAnswer = test.getText().toString();
         savedInstanceState.putString("answ", strAnswer);
         savedInstanceState.putString("expr", expression);
+        savedInstanceState.putInt("lbr", lbr);
+        savedInstanceState.putInt("rbr", rbr);
+        savedInstanceState.putInt("click", click);
         savedInstanceState.putInt("num", n);
 
         super.onSaveInstanceState(savedInstanceState);
@@ -184,10 +545,70 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter); //при повороте экрана lisView не исчезает
         expression = savedInstanceState.getString("expr", " ");
         strAnswer = savedInstanceState.getString("answ", " ");
+        lbr = savedInstanceState.getInt("lbr");
+        rbr = savedInstanceState.getInt("rbr");
+        click = savedInstanceState.getInt("click");
         n = savedInstanceState.getInt("num", 0);
         listView.setSelection(n); //прокрутка до позиции n
         result.setText(expression);
-        //test.setText(strAnswer);
+    }
+
+    public void charCheck () {
+
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Ошибка ввода", Toast.LENGTH_SHORT);
+            toast.show();
+    }
+
+    public void addBrackets (int rbr, int lbr) {
+
+        int br = lbr - rbr;
+
+        while (br >= 1) {
+            result.append(")");
+            br--;
+        }
+
+    }
+
+    public boolean calculateNineCh () {
+        expression = result.getText().toString();
+        int position = 0, numNUM = 0, ohNo = 0;
+        for (char element : expression.toCharArray()){
+            if (element == '1' || element == '2' || element == '3' || element == '4'
+                    || element == '5'  || element == '6' || element == '7' || element == '8'
+                    || element == '9') {
+
+                if (numNUM == 14) {
+                    ohNo = 1;
+                }
+                else {
+                    numNUM++;
+                    position++;
+                }
+            }
+
+            if (element == '+'|| element == '-' || element == '/' || element == '*' || element == '%'
+                    || element == '√' || element == '^' || element == '(') {
+                numNUM = 0;
+                ohNo = 0;
+            }
+
+            if (element == '.') {
+
+                numNUM = 0;
+                ohNo = 0;
+
+            }
+        }
+
+        System.out.println("символов: "+ numNUM);
+        if (ohNo == 1) {
+
+            System.out.println("ohNO");
+            return true;
+
+        } else return false;
     }
 
 }

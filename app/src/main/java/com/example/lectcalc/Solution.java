@@ -27,6 +27,17 @@ public class Solution {
         expression = expression.replace("tan(.", "tan(");
         expression = expression.replace(".tan(", "tan(");
         expression = expression.replace("tan(.", "tan(");
+        expression = expression.replace("1(", "1*(");
+        expression = expression.replace("2(", "2*(");
+        expression = expression.replace("3(", "3*(");
+        expression = expression.replace("4(", "4*(");
+        expression = expression.replace("5(", "5*(");
+        expression = expression.replace("6(", "6*(");
+        expression = expression.replace("7(", "7*(");
+        expression = expression.replace("8(", "8*(");
+        expression = expression.replace("9(", "9*(");
+        expression = expression.replace("0(", "0*(");
+        expression = expression.replace(")(", ")*(");
 
         Solution solution = new Solution();
         //solution.recurse(expression, 0); //expected output 0.5 6
@@ -166,7 +177,6 @@ public class Solution {
                         i += 2;
                         countOperation++;
                     }
-
 
                     else
                         throw new RuntimeException("Unexpected character: " + expr[i] + " at position " + i);

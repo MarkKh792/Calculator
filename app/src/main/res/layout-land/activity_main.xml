@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#4CAF50">
+    android:background="#FFFFFF"
+    android:backgroundTint="#323232">
 
     <ListView
         android:id="@+id/listView1"
@@ -29,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#F44336"
-            android:foregroundTint="#F44336"
+            android:backgroundTint="#ED5A4F"
+            android:foregroundTint="#ED5A4F"
             android:onClick="onClick"
             android:text="C" />
 
@@ -39,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#FF9800"
+            android:backgroundTint="#038B9C"
             android:onClick="onClick"
             android:text="%" />
 
@@ -48,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#4CAF50"
+            android:backgroundTint="#038B9C"
             android:onClick="onClick"
             android:text="sin" />
 
@@ -57,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#4CAF50"
+            android:backgroundTint="#038B9C"
             android:onClick="onClick"
             android:text="cos" />
 
@@ -66,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#4CAF50"
+            android:backgroundTint="#038B9C"
             android:onClick="onClick"
             android:text="tg" />
 
@@ -75,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#FF9800"
+            android:backgroundTint="#038B9C"
             android:onClick="onClick"
             android:text="(" />
 
@@ -84,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#FF9800"
+            android:backgroundTint="#038B9C"
             android:onClick="onClick"
             android:text=")" />
 
@@ -93,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#FF9800"
+            android:backgroundTint="#038B9C"
             android:onClick="onClick"
             android:text="/" />
 
@@ -101,7 +102,7 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:backgroundTint="#F44336"
             android:onClick="onClick"
             android:text="del" />
@@ -121,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="7" />
 
@@ -130,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="8" />
 
@@ -139,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="9" />
 
@@ -154,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#FF9800"
+                android:backgroundTint="#038B9C"
                 android:onClick="onClick"
                 android:text="*" />
 
@@ -163,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#038B9C"
                 android:onClick="onClick"
                 android:text="X^y" />
 
@@ -172,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#038B9C"
                 android:onClick="onClick"
                 android:text="1/x" />
         </LinearLayout>
@@ -193,7 +194,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="4" />
 
@@ -202,7 +203,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="5" />
 
@@ -211,7 +212,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="6" />
 
@@ -226,7 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#FF9800"
+                android:backgroundTint="#038B9C"
                 android:onClick="onClick"
                 android:text="-" />
 
@@ -235,7 +236,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#038B9C"
                 android:onClick="onClick"
                 android:text="log" />
 
@@ -244,7 +245,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#038B9C"
                 android:onClick="onClick"
                 android:text="!" />
         </LinearLayout>
@@ -265,7 +266,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="1" />
 
@@ -274,7 +275,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="2" />
 
@@ -283,7 +284,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="3" />
 
@@ -298,7 +299,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#FF9800"
+                android:backgroundTint="#038B9C"
                 android:onClick="onClick"
                 android:text="+" />
 
@@ -307,7 +308,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#038B9C"
                 android:onClick="onClick"
                 android:text="ln" />
 
@@ -316,7 +317,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#038B9C"
                 android:onClick="onClick"
                 android:text="√‎" />
 
@@ -333,17 +334,16 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="79dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.1"
+            android:layout_weight="1.1"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/pi"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#FF9800"
+                android:backgroundTint="?attr/colorAccent"
                 android:onClick="onClick"
                 android:text="pi" />
 
@@ -351,8 +351,7 @@
                 android:id="@+id/e"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#FF9800"
+                android:backgroundTint="?attr/colorAccent"
                 android:onClick="onClick"
                 android:text="e" />
 
@@ -362,8 +361,8 @@
             android:id="@+id/btn0"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"
-            android:backgroundTint="@color/purple_200"
+            android:layout_weight="1"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="0" />
 
@@ -371,8 +370,8 @@
             android:id="@+id/dot"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"
-            android:backgroundTint="@color/purple_200"
+            android:layout_weight="1"
+            android:backgroundTint="?attr/colorAccent"
             android:onClick="onClick"
             android:text="." />
 
@@ -380,8 +379,8 @@
             android:id="@+id/equals"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="#FF9800"
+            android:layout_weight="2.32"
+            android:backgroundTint="#038B9C"
             android:onClick="onClick"
             android:text="=" />
     </LinearLayout>

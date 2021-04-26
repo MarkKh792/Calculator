@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     TextView result;
     String expression = " ", strAnswer = " ";
     int c, n, i, rbr, lbr, plusCh, minusCh, er, click = 0;
+    int noAddBrackets = 0;
 
-    //double answer;
     BigDecimal answer;
 
     ListView listView;
@@ -425,21 +425,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.root:
                     expression = result.getText().toString();
-                    if (expression.length() > 0) {
-                        lastCh1 = expression.charAt(expression.length() - 1);
-                        if (lastCh1 == '-' || lastCh1 == '/' || lastCh1 == '^' || lastCh1 == '*'
-                                || lastCh1 == '+' || lastCh1 == '!' || lastCh1 == '.') {
-                            expression = expression.substring(0, expression.length() - 1);
-                            expression = expression + "√";
-                            result.setText(expression);
-                            i = 0;
-                        } else if (lastCh1 != '√') result.append("√");
-                    } else {
                         result.append("√");
                         i = 0;
-                    }
                     break;
                 case R.id.erase:
+                    noAddBrackets = 0;
                     c = 0;
                     result.setText("");
                     if (i == 1) {
@@ -451,6 +441,7 @@ public class MainActivity extends AppCompatActivity {
                     rbr = 0;
                     break;
                 case R.id.back:
+                    noAddBrackets = 0;
                     expression = result.getText().toString();
 
                     if (expression.length() > 0) {
@@ -472,39 +463,54 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.equals:
                     try {
                         expression = result.getText().toString();
-                        if (click == 0) {
-                            if (rbr != lbr) {
-                                if (lbr > rbr) {
-                                    addBrackets(rbr, lbr);
-                                } else {
+                        char lastCh = expression.charAt(expression.length() - 1);
+                        char preLastChar = expression.charAt(expression.length() - 2);
+                        if (lastCh == ')') {
+                            if (preLastChar == '+' || preLastChar == '-' || preLastChar == '*' || preLastChar == '/'
+                                    || preLastChar == '^' || preLastChar == '√' || preLastChar == '.') {
+                                expression = expression.substring(0, expression.length() - 2) + ')';
+                                result.setText(expression);
+                            }
+                        } else if (lastCh == '+' || lastCh == '-' || lastCh == '*' || lastCh == '/'
+                                || lastCh == '^' || lastCh == '√' || lastCh == '.') {
+                            expression = expression.substring(0, expression.length() - 1);
+                            result.setText(expression);
+                        }
 
-                                    Toast toast = Toast.makeText(getApplicationContext(),
-                                            "Неверно расставлены скобки", Toast.LENGTH_SHORT);
-                                    toast.show();
-                                    break;
+                        if (noAddBrackets == 0) {
+                            if (click == 0) {
+                                if (rbr != lbr) {
+                                    if (lbr > rbr) {
+                                        addBrackets(rbr, lbr);
+                                    } else {
+                                        Toast toast = Toast.makeText(getApplicationContext(),
+                                                "Неверно расставлены скобки", Toast.LENGTH_SHORT);
+                                        toast.show();
+                                        break;
+                                    }
+                                }
+                            }
+                            if (click == 1) {
+                                rbr = 0;
+                                lbr = 0;
+                                for (char element : expression.toCharArray()) {
+                                    if (element == '(') lbr++;
+                                    if (element == ')') rbr++;
+                                }
+                                if (lbr != rbr) {
+                                    if (lbr > rbr) {
+                                        addBrackets(rbr, lbr);
+                                        click = 0;
+                                    } else {
+                                        Toast toast = Toast.makeText(getApplicationContext(),
+                                                "Неверно расставлены скобки", Toast.LENGTH_SHORT);
+                                        toast.show();
+                                        break;
+                                    }
                                 }
                             }
                         }
-                        if (click == 1) {
-                            rbr = 0;
-                            lbr = 0;
-                            for (char element : expression.toCharArray()){
-                                if (element == '(') lbr++;
-                                if (element == ')') rbr++;
-                            }
-                            if (lbr != rbr) {
-                                if (lbr > rbr) {
-                                    addBrackets(rbr, lbr);
-                                    click = 0;
-                                }
-                                else {
-                                    Toast toast = Toast.makeText(getApplicationContext(),
-                                            "Неверно расставлены скобки", Toast.LENGTH_SHORT);
-                                    toast.show();
-                                    break;
-                                }
-                            }
-                        }
+                        noAddBrackets = 1;
                         c = 1;
                         answer = solution.calculate(result.getText().toString(), 0);
                         result.append(" = " + answer.toString());
@@ -577,7 +583,7 @@ public class MainActivity extends AppCompatActivity {
         for (char element : expression.toCharArray()){
             if (element == '1' || element == '2' || element == '3' || element == '4'
                     || element == '5'  || element == '6' || element == '7' || element == '8'
-                    || element == '9') {
+                    || element == '9' || element == '0') {
 
                 if (numNUM == 14) {
                     ohNo = 1;

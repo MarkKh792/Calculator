@@ -26,12 +26,7 @@ public class History extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         add = findViewById(R.id.add);
-
-
         listView = (ListView) findViewById(R.id.listView1);
-
-
-
 
     }
     public void addToHistory (String expression) {
